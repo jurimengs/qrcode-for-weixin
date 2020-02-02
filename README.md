@@ -1,5 +1,6 @@
 # qrcode-for-weixin
 generate an qrcode picture with custom text, so that it can be recognized by long tap in wechat directly, and also can be save or transmit directly
+
 生成一个带自定义文本的二维码图片，当我们在微信中打开该页面时，可以直接长按识别二维码，且可以直接带文字保存转发
 
 qrcode-for-weixin.html 用于演示生成带文字的二维码图片，
