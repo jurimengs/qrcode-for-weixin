@@ -18,3 +18,6 @@ qrcode-for-weixin.html 用于演示生成带文字的二维码图片，
 为了方便功能实现，对jquery-qrcode源码做了些微的改动(参见 fillIndividuationContent 函数)，为了与源码区分，更名为jquery-qrcode-custom.js, 为了表示对 jquery-qrcode 的尊重, 代码包里也包含了 jquery-qrcode.js 
 
 交流邮箱： jurimengs@163.com, 微信交流号 jurimengs
+
+
+jquery-qrcode 链接： https://github.com/lrsjng/jquery-qrcode
