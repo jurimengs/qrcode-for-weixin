@@ -1,0 +1,115 @@
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="referrer" content="always">
+    <title>生成带文字的二维码图片</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+
+</head>
+<body class=" orange-theme body-fixed-bottom" ontouchstart="">
+<div class="content-body">本demo 用于演示生成带文字的二维码图片，<div>
+
+<div class="content-body">背景介绍 ：前前年写项目有个功能：</div>
+<div class="content-body">微信中打开 <font color="red"> h5 </font> 页面后展示某链接的二维码，同时根据业务内容的不同，需要在二维码下方展示不同的文字，</div>
+<div class="content-body">麻烦需要在当前打开的页面， 直接长按就要能识别二维码并且要求可以保存，转发。</div>
+
+<div class="content-body">意味着，打开这个页面的时候，这个二维码必需是一张，带自定义内容的图片。</div>
+<div class="content-body">实现思路有两种：</div>
+<div class="content-body">后端实现</div>
+<div class="content-body">前端实现（所以就有了本案）</div>
+
+<div class="content-body">技术实现：</div>
+<div class="content-body">基于 jquery 和 jquery-qrcode-0.14.0 来生成二维码，</div>
+<div class="content-body">
+	<font color="red">为了方便功能实现，对jquery-qrcode源码做了些微的改动(参见 fillIndividuationContent 函数)，为了与源码区分，更名为jquery-qrcode-custom.js, 为了表示对 jquery-qrcode 的尊重, 代码包里也包含了 jquery-qrcode.js</font>
+</div>
+<div class="content-body">邮箱： jurimengs@qq.com, 微信交流号 jurimengs</div>
+
+<!-- 说明 -->
+<div class="container " style="min-height: 736px;">
+    <div class="header goods-headerbar "></div>
+    <div class="content no-sidebar">
+        <div class="content-body">
+            <style media="screen" id="js-showcase-style">
+            </style>
+            <div id="js-body-width" style="width: 100%;"></div>
+            <div class="order-related">
+                <div id="tabs"> 
+                    <div style="height: 7px; background: #f8f8f8; float: left; width: 100%;"></div>
+                    <div id="content">
+                        <div id="new4" >
+                            <div id="qrcodeImgContainer" class="grerweima" style="text-align: center; width: 93%; padding: 0 15px;">
+                                <img id="aimQrcodeImg" src="grerweima.jpg" style="width: 100%; ">
+                            </div>
+                            <input id="hiddenUrl" type="hidden" value="http://{#$smarty.server.SERVER_NAME#}/index.php?doctorId={#$user.uid#}">
+                            <div id="qrcodeContainer" style="display: none;"></div>
+                        </div> 
+                    </div>
+                </div>
+
+
+            </div> 
+        </div> 
+    </div>
+</div> 
+</body>
+
+<!-- 说明 -->
+<script src="jquery-3.1.0.js"></script>
+<script src="jquery-qrcode-custom.js"></script>
+
+<script>
+        $(function () { 
+            // qrcode 
+            var bgImage = $("#aimQrcodeImg")[0];
+  
+            var textPostionX = 50;
+            var $qrcodeContainer = $("#qrcodeContainer").qrcode({
+                individuation: {
+                    bgImage:bgImage,
+                    codeFixX: 350, // 二维码相对背景图的修正位置
+                    codeFixY: 40, // 二维码相对背景图的修正位置
+                    texts:[ {
+                        text: "展示文字", //
+                        fontColor: "black",
+                        font: "35px Arial",
+                        width: 40,
+                        height:20,
+                        left: textPostionX,
+                        top: 160
+                    },{
+                        text:"扫一扫 更多精彩",
+                        fontColor: "gray",
+                        font: "20px Arial",
+                        width: 40,
+                        height:20,
+                        left: textPostionX,
+                        top: 260
+                    }]
+                }, 
+
+                render: "canvas", // 渲染方式有table方式和canvas方式
+                size: 270,
+                text: "扫描后展示的内容", //二维码内容
+                typeNumber: -1,   //计算模式一般默认为-1
+                correctLevel: 2, //二维码纠错级别
+                background: "#ffffff",  //背景颜色
+                foreground: "#000000"  //二维码颜色
+            });
+            var userCodeCanvas = $qrcodeContainer.find("canvas").get(0);
+            var userCodeImg = new Image();
+            userCodeImg.src = userCodeCanvas.toDataURL("image/jpg");
+			 
+            userCodeImg.style.width = "100%";
+            $("#qrcodeImgContainer").prepend(userCodeImg);
+
+        });
+
+    </script>
+</html>
